@@ -4,8 +4,8 @@ import org.chocosolver.solver.constraints.Constraint;
 import org.chocosolver.solver.variables.IntVar;
 
 public class QueenModel {
-    private static boolean print = true;
-    private static int n = 13;
+    private static final boolean print = false;
+    private static final int n = 13;
 
     public static void main(String[] args) {
         Model model = new Model(n + "-queens problem primal");
@@ -23,9 +23,8 @@ public class QueenModel {
                 printSolution(rQueens, n);
             }
         } else {
-            while(solver.solve()) {}
+            while(solver.solve());
         }
-        long estimatedTime = solver.getTimeCountInNanoSeconds();
 
         solver.printStatistics();
     }
@@ -44,16 +43,16 @@ public class QueenModel {
 
         if (problem) {
             System.out.println("!!!!!!!!!!!!!!! THIS SOLUTION SEEMS TO BE NOT VALID !!!!!!!!!!!!!!!!!!!");
-
-            int[][] solved_matrix = new int[n][n];
-
-            // print graphical solution
-            for (int i = 0; i < n; i++) {
-                solved_matrix[i][rQueens[i].getValue()] = 1;
-            }
-
-            printMatrix(solved_matrix, n);
         }
+
+        int[][] solved_matrix = new int[n][n];
+
+        // print graphical solution
+        for (int i = 0; i < n; i++) {
+            solved_matrix[i][rQueens[i].getValue()] = 1;
+        }
+
+        printMatrix(solved_matrix, n);
 
     }
 
